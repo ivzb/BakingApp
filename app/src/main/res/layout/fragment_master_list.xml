@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <GridView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gvRecipes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:adjustViewBounds="true"
+        android:columnWidth="180dp"
+        android:gravity="center"
+        android:horizontalSpacing="8dp"
+        android:numColumns="1"
+        android:padding="16dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="8dp">
+    </GridView>
+
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/tvLoadFailed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/could_not_load_recipes"
+        android:textSize="24sp"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/btnTryAgain"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:text="@string/try_again"/>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:text="@string/next" />
+</LinearLayout>
