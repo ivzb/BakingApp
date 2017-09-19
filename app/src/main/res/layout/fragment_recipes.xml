@@ -24,6 +24,7 @@
         android:id="@+id/pbLoading"
         android:layout_width="42dp"
         android:layout_height="42dp"
+        android:visibility="gone"
         android:layout_gravity="center" />
 
     <TextView
@@ -42,13 +43,4 @@
         android:layout_weight="1"
         android:visibility="gone"
         android:text="@string/try_again"/>
-
-    <Button
-        android:id="@+id/btnNext"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:visibility="gone"
-        android:text="@string/next" />
 </LinearLayout>

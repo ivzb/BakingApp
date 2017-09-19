@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.udacity.baking">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".BakingApplication"
         android:allowBackup="true"
@@ -11,14 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.recipes.RecipesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
+        <activity android:name=".ui.ingredients.IngredientsActivity" />
+
+        <activity android:name=".ui.steps.StepsActivity" />
+    </application>
 </manifest>

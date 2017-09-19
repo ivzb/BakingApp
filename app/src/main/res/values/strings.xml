@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Baking</string>
     <string name="next">Next</string>
+    <string name="previous">Previous</string>
     <string name="could_not_load_recipes">Could not load Recipes.</string>
     <string name="try_again">Try again</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="steps">Steps</string>
 </resources>

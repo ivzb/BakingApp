@@ -1,4 +1,4 @@
-package com.udacity.baking.ui;
+package com.udacity.baking.ui.recipes;
 
 import android.content.Context;
 import android.view.View;
@@ -8,12 +8,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class MasterListAdapter extends BaseAdapter {
+public class RecipesAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<String> mTitles;
 
-    MasterListAdapter(Context context, List<String> titles) {
+    RecipesAdapter(Context context, List<String> titles) {
         mContext = context;
         mTitles = titles;
     }
