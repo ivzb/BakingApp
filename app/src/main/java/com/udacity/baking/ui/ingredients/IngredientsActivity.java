@@ -1,15 +1,15 @@
 package com.udacity.baking.ui.ingredients;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Parcelable;
-import android.os.PersistableBundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.udacity.baking.R;
 import com.udacity.baking.data.entities.Recipe;
 import com.udacity.baking.data.entities.Step;
+import com.udacity.baking.ui.base.IdlingActivity;
 import com.udacity.baking.ui.recipes.RecipesActivity;
 import com.udacity.baking.ui.steps.StepsActivity;
 import com.udacity.baking.ui.steps.StepsFragment;

@@ -1,50 +1,69 @@
 package com.udacity.baking.ui.recipes;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.udacity.baking.R;
+import com.udacity.baking.data.entities.Recipe;
 
 import java.util.List;
 
-public class RecipesAdapter extends BaseAdapter {
+public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
 
-    private Context mContext;
-    private List<String> mTitles;
+    private List<Recipe> mRecipes;
+    private RecipesFragment.OnRecipeClickListener mClickCallback;
 
-    RecipesAdapter(Context context, List<String> titles) {
-        mContext = context;
-        mTitles = titles;
+    RecipesAdapter(
+            List<Recipe> recipes,
+            RecipesFragment.OnRecipeClickListener clickCallback) {
+
+        mRecipes = recipes;
+        mClickCallback = clickCallback;
     }
 
     @Override
-    public int getCount() {
-        return mTitles.size();
+    public RecipesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View contactView = inflater.inflate(R.layout.recycler_item_recipe, parent, false);
+
+        return new RecipesAdapter.ViewHolder(contactView);
     }
 
     @Override
-    public Object getItem(int i) {
-        return mTitles.get(i);
+    public void onBindViewHolder(RecipesAdapter.ViewHolder viewHolder, int position) {
+        Recipe recipe = mRecipes.get(position);
+
+        viewHolder.tvRecipe.setText(recipe.getName());
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public int getItemCount() {
+        if (mRecipes == null) return 0;
+        return mRecipes.size();
     }
 
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        TextView titleView;
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        if (convertView == null) {
-            titleView = new TextView(mContext);
-            titleView.setPadding(8, 8, 8, 8);
-        } else {
-            titleView = (TextView) convertView;
+        TextView tvRecipe;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+
+            tvRecipe = itemView.findViewById(R.id.tvRecipe);
+
+            itemView.setOnClickListener(this);
         }
 
-        titleView.setText(mTitles.get(position));
-
-        return titleView;
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            mClickCallback.onRecipeSelected(mRecipes.get(position));
+        }
     }
 }

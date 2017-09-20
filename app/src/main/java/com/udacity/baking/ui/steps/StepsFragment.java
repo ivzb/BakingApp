@@ -44,7 +44,10 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
     private final static String TAG = StepsFragment.class.getSimpleName();
 
     private SimpleExoPlayerView mPlayerView;
+    private SimpleDraweeView mImageView;
+    private TextView mTvDescription;
 
+    private boolean mLandscape;
     private Step mStep;
 
     private SimpleExoPlayer mExoPlayer;
@@ -62,29 +65,22 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
 
         final View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
 
-        TextView mTvDescription = rootView.findViewById(R.id.tvDescription);
+        mLandscape = rootView.findViewById(R.id.landscape) != null;
+        mTvDescription = rootView.findViewById(R.id.tvDescription);
         mPlayerView = rootView.findViewById(R.id.playerView);
-
-        SimpleDraweeView mImageView = rootView.findViewById(R.id.imageView);
+        mImageView = rootView.findViewById(R.id.imageView);
 
         if (mStep != null) {
             mTvDescription.setText(mStep.getDescription());
 
-            if (!mStep.getVideoURL().equals("")) {
-                show(mPlayerView);
-                hide(mImageView);
+            String videoSuffix = "mp4";
 
-                mPlayerView.setDefaultArtwork(BitmapFactory.decodeResource(getResources(), R.drawable.baking));
-
-                initializeMediaSession();
-                initializePlayer(Uri.parse(mStep.getVideoURL()));
+            if (mStep.getVideoURL().endsWith(videoSuffix)) {
+                showPlayer(mStep.getVideoURL());
+            } else if (mStep.getThumbnailURL().endsWith(videoSuffix)) {
+                showPlayer(mStep.getThumbnailURL());
             } else {
-                show(mImageView);
-                hide(mPlayerView);
-
-                Uri uri = Uri.parse(mStep.getThumbnailURL());
-                // todo: fix uri
-                mImageView.setImageURI(uri);
+                showImage();
             }
         }
 
@@ -100,6 +96,26 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
 
     public void setStep(Step step) {
         mStep = step;
+    }
+
+    private void showPlayer(String url) {
+        show(mPlayerView);
+        hide(mImageView);
+
+        mPlayerView.setDefaultArtwork(BitmapFactory.decodeResource(getResources(), R.drawable.baking));
+
+        initializeMediaSession();
+        initializePlayer(Uri.parse(url));
+
+        if (mLandscape) {
+            hide(mTvDescription);
+        }
+    }
+
+    private void showImage() {
+        show(mImageView);
+        hide(mPlayerView);
+        show(mTvDescription);
     }
 
     private void initializeMediaSession() {
@@ -188,13 +204,10 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
     }
 
     @Override
-    public void onPlayerError(ExoPlaybackException error) {
-        mPlayerView.setUseController(false);
-    }
+    public void onPlayerError(ExoPlaybackException error) { }
 
     @Override
-    public void onPositionDiscontinuity() {
-    }
+    public void onPositionDiscontinuity() { }
 
     /**
      * Media Session Callbacks, where all external clients control the player.

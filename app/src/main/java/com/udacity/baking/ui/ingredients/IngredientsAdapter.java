@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.udacity.baking.R;
 import com.udacity.baking.data.entities.Ingredient;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder> {
@@ -33,9 +34,10 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     public void onBindViewHolder(IngredientsAdapter.ViewHolder viewHolder, int position) {
         Ingredient ingredient = mIngredients.get(position);
 
-        viewHolder.tvQuantity.setText(String.valueOf(ingredient.getQuantity()));
-        viewHolder.tvMeasure.setText(ingredient.getMeasure());
-        viewHolder.tvIngredient.setText(ingredient.getIngredient());
+        String quantity = new DecimalFormat("#.##").format(ingredient.getQuantity());
+        String format = String.format("%s %s %s", quantity, ingredient.getMeasure(), ingredient.getIngredient());
+
+        viewHolder.tvIngredient.setText(format);
     }
 
     @Override
@@ -46,15 +48,11 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvQuantity;
-        TextView tvMeasure;
         TextView tvIngredient;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            tvQuantity = itemView.findViewById(R.id.tvQuantity);
-            tvMeasure = itemView.findViewById(R.id.tvMeasure);
             tvIngredient = itemView.findViewById(R.id.tvIngredient);
         }
     }

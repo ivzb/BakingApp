@@ -8,19 +8,19 @@ import org.parceler.Parcel;
 public class Step {
 
     @SerializedName("id")
-    private int id;
+    int id;
 
     @SerializedName("shortDescription")
-    private String shortDescription;
+    String shortDescription;
 
     @SerializedName("description")
-    private String description;
+    String description;
 
     @SerializedName("videoURL")
-    private String videoURL;
+    String videoURL;
 
     @SerializedName("thumbnailURL")
-    private String thumbnailURL;
+    String thumbnailURL;
 
     public Step() { }
 

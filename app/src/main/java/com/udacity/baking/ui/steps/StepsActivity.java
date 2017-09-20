@@ -1,19 +1,13 @@
 package com.udacity.baking.ui.steps;
 
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.media.session.MediaSessionCompat;
-import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.udacity.baking.R;
 import com.udacity.baking.data.entities.Recipe;
 import com.udacity.baking.data.entities.Step;

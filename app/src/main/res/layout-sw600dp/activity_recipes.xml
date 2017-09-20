@@ -6,9 +6,8 @@
     android:orientation="horizontal"
     tools:context=".ui.recipes.RecipesActivity">
 
-    <fragment
+    <FrameLayout
         android:id="@+id/fragment_recipes"
-        android:name="com.udacity.baking.ui.recipes.RecipesFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

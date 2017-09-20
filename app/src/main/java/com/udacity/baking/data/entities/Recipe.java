@@ -10,24 +10,24 @@ import java.util.List;
 public class Recipe {
 
     @SerializedName("id")
-    private int id;
+    int id;
 
     @SerializedName("name")
-    private String name;
+    String name;
 
     @SerializedName("ingredients")
-    private List<Ingredient> ingredients;
+    List<Ingredient> ingredients;
 
     @SerializedName("steps")
-    private List<Step> steps;
+    List<Step> steps;
 
     @SerializedName("serving")
-    private int serving;
+    int serving;
 
     @SerializedName("image")
-    private String image;
+    String image;
 
-    public Recipe() { }
+    Recipe() { }
 
     public Recipe(int id, String name, List<Ingredient> ingredients, List<Step> steps, int serving, String image) {
         this.id = id;

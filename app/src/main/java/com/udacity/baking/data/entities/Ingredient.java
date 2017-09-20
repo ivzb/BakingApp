@@ -8,16 +8,16 @@ import org.parceler.Parcel;
 public class Ingredient {
 
     @SerializedName("id")
-    private int id;
+    int id;
 
     @SerializedName("quantity")
-    private double quantity;
+    double quantity;
 
     @SerializedName("measure")
-    private String measure;
+    String measure;
 
     @SerializedName("ingredient")
-    private String ingredient;
+    String ingredient;
 
     public Ingredient() { }
 
