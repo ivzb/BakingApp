@@ -54,7 +54,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         ViewHolder(View itemView) {
             super(itemView);
 
-            tvRecipe = itemView.findViewById(R.id.tvRecipe);
+            tvRecipe = (TextView) itemView.findViewById(R.id.tvRecipe);
 
             itemView.setOnClickListener(this);
         }

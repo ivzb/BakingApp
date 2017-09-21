@@ -53,7 +53,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         ViewHolder(View itemView) {
             super(itemView);
 
-            tvIngredient = itemView.findViewById(R.id.tvIngredient);
+            tvIngredient = (TextView) itemView.findViewById(R.id.tvIngredient);
         }
     }
 }

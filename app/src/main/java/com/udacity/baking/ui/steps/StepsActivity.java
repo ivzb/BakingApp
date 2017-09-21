@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.udacity.baking.R;
 import com.udacity.baking.data.entities.Recipe;
@@ -44,8 +45,8 @@ public class StepsActivity extends AppCompatActivity {
             mPosition = savedInstanceState.getInt(PositionKey);
         }
 
-        mBtnPrevious = findViewById(R.id.btnPrevious);
-        mBtnNext = findViewById(R.id.btnNext);
+        mBtnPrevious = (Button) findViewById(R.id.btnPrevious);
+        mBtnNext = (Button) findViewById(R.id.btnNext);
 
         mBtnPrevious.setOnClickListener(new View.OnClickListener() {
             @Override

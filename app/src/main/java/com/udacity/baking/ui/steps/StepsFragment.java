@@ -10,6 +10,7 @@ import android.support.v4.media.session.PlaybackStateCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -68,9 +69,9 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
 
         mLandscape = rootView.findViewById(R.id.landscape) != null;
         mTablet = rootView.findViewById(R.id.tablet) != null;
-        mTvDescription = rootView.findViewById(R.id.tvDescription);
-        mPlayerView = rootView.findViewById(R.id.playerView);
-        mImageView = rootView.findViewById(R.id.imageView);
+        mTvDescription = (TextView) rootView.findViewById(R.id.tvDescription);
+        mPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.playerView);
+        mImageView = (SimpleDraweeView) rootView.findViewById(R.id.imageView);
 
         if (mStep != null) {
             mTvDescription.setText(mStep.getDescription());

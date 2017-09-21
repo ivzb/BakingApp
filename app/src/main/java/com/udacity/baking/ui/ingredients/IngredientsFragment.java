@@ -73,8 +73,8 @@ public class IngredientsFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
-        mRvIngredients = rootView.findViewById(R.id.rvIngredients);
-        mRvSteps = rootView.findViewById(R.id.rvSteps);
+        mRvIngredients = (RecyclerView) rootView.findViewById(R.id.rvIngredients);
+        mRvSteps = (RecyclerView) rootView.findViewById(R.id.rvSteps);
 
         if (mRecipe != null) {
             initIngredients();

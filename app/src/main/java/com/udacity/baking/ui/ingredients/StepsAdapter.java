@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.udacity.baking.R;
 import com.udacity.baking.data.entities.Step;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder> {
@@ -54,7 +56,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder> 
         ViewHolder(View itemView) {
             super(itemView);
 
-            tvDescription = itemView.findViewById(R.id.tvDescription);
+            tvDescription =  (TextView) itemView.findViewById(R.id.tvDescription);
 
             itemView.setOnClickListener(this);
         }

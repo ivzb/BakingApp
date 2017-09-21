@@ -73,10 +73,10 @@ public class RecipesFragment extends Fragment implements Callback<List<Recipe>>,
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_recipes, container, false);
 
-        mRvRecipes = rootView.findViewById(R.id.rvRecipes);
-        mPbLoading = rootView.findViewById(R.id.pbLoading);
-        mTvLoadFailed = rootView.findViewById(R.id.tvLoadFailed);
-        mBtnTryAgain = rootView.findViewById(R.id.btnTryAgain);
+        mRvRecipes = (RecyclerView) rootView.findViewById(R.id.rvRecipes);
+        mPbLoading = (ProgressBar) rootView.findViewById(R.id.pbLoading);
+        mTvLoadFailed = (TextView) rootView.findViewById(R.id.tvLoadFailed);
+        mBtnTryAgain = (Button) rootView.findViewById(R.id.btnTryAgain);
 
         mBtnTryAgain.setOnClickListener(this);
 
