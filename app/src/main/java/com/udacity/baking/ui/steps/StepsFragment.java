@@ -89,8 +89,6 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
 
             if (mStep.getVideoURL().endsWith(videoSuffix)) {
                 showPlayer(mStep.getVideoURL());
-            } else if (mStep.getThumbnailURL().endsWith(videoSuffix)) {
-                showPlayer(mStep.getThumbnailURL());
             } else {
                 showImage();
             }
