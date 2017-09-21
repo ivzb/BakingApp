@@ -39,6 +39,5 @@ public class RESTClient {
         sRETROFIT = null;
     }
 
-    // Prevent direct instantiation.
-    private RESTClient() {}
+    private RESTClient() { }
 }

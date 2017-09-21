@@ -48,6 +48,7 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
     private TextView mTvDescription;
 
     private boolean mLandscape;
+    private boolean mTablet;
     private Step mStep;
 
     private SimpleExoPlayer mExoPlayer;
@@ -66,6 +67,7 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
         final View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
 
         mLandscape = rootView.findViewById(R.id.landscape) != null;
+        mTablet = rootView.findViewById(R.id.tablet) != null;
         mTvDescription = rootView.findViewById(R.id.tvDescription);
         mPlayerView = rootView.findViewById(R.id.playerView);
         mImageView = rootView.findViewById(R.id.imageView);
@@ -107,7 +109,7 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
         initializeMediaSession();
         initializePlayer(Uri.parse(url));
 
-        if (mLandscape) {
+        if (mLandscape && !mTablet) {
             hide(mTvDescription);
         }
     }
@@ -228,5 +230,4 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
             mExoPlayer.seekTo(0);
         }
     }
-
 }
