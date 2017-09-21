@@ -90,7 +90,7 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
             if (mStep.getVideoURL().endsWith(videoSuffix)) {
                 showPlayer(mStep.getVideoURL());
             } else {
-                showImage();
+                showImage(mStep.getThumbnailURL());
             }
         }
 
@@ -129,7 +129,11 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
         }
     }
 
-    private void showImage() {
+    private void showImage(String imageUrl) {
+        if (!imageUrl.equals("")) {
+            mImageView.setImageURI(imageUrl);
+        }
+
         show(mImageView);
         hide(mPlayerView);
         show(mTvDescription);
