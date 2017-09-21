@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.udacity.baking.R;
 import com.udacity.baking.data.entities.Recipe;
 import com.udacity.baking.data.entities.Step;
-import com.udacity.baking.ui.base.IdlingActivity;
 import com.udacity.baking.ui.recipes.RecipesActivity;
 import com.udacity.baking.ui.steps.StepsActivity;
 import com.udacity.baking.ui.steps.StepsFragment;

@@ -24,5 +24,26 @@
         <activity android:name=".ui.ingredients.IngredientsActivity" />
 
         <activity android:name=".ui.steps.StepsActivity" />
+
+        <receiver android:name=".widget.WidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_provider" />
+        </receiver>
+
+        <service android:name=".widget.WidgetService" />
+
+        <service
+            android:name=".widget.IngredientsWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <provider
+            android:name=".provider.BakingContentProvider"
+            android:authorities="com.udacity.baking"
+            android:exported="true" />
     </application>
 </manifest>

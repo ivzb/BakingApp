@@ -1,4 +1,4 @@
-package com.udacity.baking.idlingResource;
+package com.udacity.baking.utils;
 
 import android.support.annotation.Nullable;
 import android.support.test.espresso.IdlingResource;

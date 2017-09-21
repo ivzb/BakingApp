@@ -12,13 +12,9 @@ import android.view.ViewGroup;
 
 import com.udacity.baking.R;
 import com.udacity.baking.data.entities.Recipe;
-import com.udacity.baking.idlingResource.SimpleIdlingResource;
 import com.udacity.baking.utils.AdapterUtils;
-import com.udacity.baking.utils.ParcelableUtils;
 
 import org.parceler.Parcels;
-
-import java.util.List;
 
 public class IngredientsFragment extends Fragment {
 

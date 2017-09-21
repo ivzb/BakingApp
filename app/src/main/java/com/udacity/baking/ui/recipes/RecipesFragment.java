@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +18,9 @@ import com.udacity.baking.R;
 import com.udacity.baking.data.BakingAPI;
 import com.udacity.baking.data.RESTClient;
 import com.udacity.baking.data.entities.Recipe;
-import com.udacity.baking.idlingResource.SimpleIdlingResource;
 import com.udacity.baking.utils.AdapterUtils;
 import com.udacity.baking.utils.ParcelableUtils;
+import com.udacity.baking.utils.SimpleIdlingResource;
 
 import java.util.List;
 

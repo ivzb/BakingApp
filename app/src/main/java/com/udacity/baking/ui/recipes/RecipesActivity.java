@@ -1,22 +1,17 @@
 package com.udacity.baking.ui.recipes;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
-import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.GridView;
 
 import com.udacity.baking.R;
+import com.udacity.baking.data.entities.Ingredient;
 import com.udacity.baking.data.entities.Recipe;
-import com.udacity.baking.idlingResource.SimpleIdlingResource;
+import com.udacity.baking.provider.BakingContract;
 import com.udacity.baking.ui.base.IdlingActivity;
 import com.udacity.baking.ui.ingredients.IngredientsActivity;
-import com.udacity.baking.ui.ingredients.IngredientsFragment;
+import com.udacity.baking.widget.WidgetService;
 
 import org.parceler.Parcels;
 
@@ -50,5 +45,15 @@ public class RecipesActivity extends IdlingActivity implements RecipesFragment.O
         final Intent intent = new Intent(this, IngredientsActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
+
+        getContentResolver().delete(BakingContract.IngredientEntry.CONTENT_URI, null, null);
+
+        for (Ingredient ingredient: recipe.getIngredients()) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(BakingContract.IngredientEntry.COLUMN_INGREDIENT, ingredient.getIngredient());
+            getContentResolver().insert(BakingContract.IngredientEntry.CONTENT_URI, contentValues);
+        }
+
+        WidgetService.startActionUpdateRecipe(this);
     }
 }

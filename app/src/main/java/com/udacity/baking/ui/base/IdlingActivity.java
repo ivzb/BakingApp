@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 
-import com.udacity.baking.idlingResource.SimpleIdlingResource;
+import com.udacity.baking.utils.SimpleIdlingResource;
 
 public abstract class IdlingActivity extends AppCompatActivity {
 
