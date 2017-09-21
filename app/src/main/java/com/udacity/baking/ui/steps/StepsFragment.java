@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -42,6 +43,7 @@ import static com.udacity.baking.utils.ViewUtils.show;
 public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
 
     private final static String StepKey = "step";
+    private final static String PositionKey = "position";
     private final static String TAG = StepsFragment.class.getSimpleName();
 
     private SimpleExoPlayerView mPlayerView;
@@ -51,6 +53,7 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
     private boolean mLandscape;
     private boolean mTablet;
     private Step mStep;
+    private long mPosition;
 
     private SimpleExoPlayer mExoPlayer;
     private static MediaSessionCompat mMediaSession;
@@ -60,9 +63,15 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (savedInstanceState != null && savedInstanceState.containsKey(StepKey)) {
-            Parcelable parcel = savedInstanceState.getParcelable(StepKey);
-            setStep((Step) Parcels.unwrap(parcel));
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(StepKey)) {
+                Parcelable parcel = savedInstanceState.getParcelable(StepKey);
+                setStep((Step) Parcels.unwrap(parcel));
+            }
+
+            if (savedInstanceState.containsKey(PositionKey)) {
+                mPosition = savedInstanceState.getLong(PositionKey, C.TIME_UNSET);
+            }
         }
 
         final View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
@@ -95,6 +104,13 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
         if (mStep != null) {
             currentState.putParcelable(StepKey, Parcels.wrap(mStep));
         }
+
+        if (mExoPlayer != null) {
+            long position = mExoPlayer.getCurrentPosition();
+            currentState.putLong(PositionKey, position);
+        }
+
+        releasePlayer();
     }
 
     public void setStep(Step step) {
@@ -157,6 +173,8 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
                     new DefaultDataSourceFactory(getContext(), userAgent),
                     new DefaultExtractorsFactory(), null, null);
 
+            if (mPosition != C.TIME_UNSET) mExoPlayer.seekTo(mPosition);
+
             mExoPlayer.prepare(mediaSource);
             mExoPlayer.setPlayWhenReady(true);
         }
@@ -172,12 +190,6 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
         if (mMediaSession != null) {
             mMediaSession.setActive(false);
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        releasePlayer();
     }
 
     @Override
