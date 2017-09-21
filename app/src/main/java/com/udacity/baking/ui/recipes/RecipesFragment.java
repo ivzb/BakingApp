@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,13 +46,14 @@ public class RecipesFragment extends Fragment implements Callback<List<Recipe>>,
     private SimpleIdlingResource mIdlingResource;
 
     private GridLayoutManager mStepsLayoutManager;
+    private Parcelable mLayoutState;
 
     private RecyclerView mRvRecipes;
     private ProgressBar mPbLoading;
     private TextView mTvLoadFailed;
     private Button mBtnTryAgain;
 
-    public interface OnRecipeClickListener {
+    interface OnRecipeClickListener {
         void onRecipeSelected(Recipe recipe);
     }
 
@@ -87,12 +89,11 @@ public class RecipesFragment extends Fragment implements Callback<List<Recipe>>,
             Parcelable[] parcelables = savedInstanceState.getParcelableArray(RecipesKey);
             List<Recipe> recipes = ParcelableUtils.fromArray(parcelables);
 
-            if (savedInstanceState.containsKey(LayoutManagerStateKey)) {
-                Parcelable state = savedInstanceState.getParcelable(LayoutManagerStateKey);
-                mStepsLayoutManager.onRestoreInstanceState(state);
-            }
-
             setRecipes(recipes);
+
+            if (savedInstanceState.containsKey(LayoutManagerStateKey)) {
+                mLayoutState = savedInstanceState.getParcelable(LayoutManagerStateKey);
+            }
         }
 
         return rootView;
@@ -108,13 +109,14 @@ public class RecipesFragment extends Fragment implements Callback<List<Recipe>>,
         }
 
         if (mStepsLayoutManager != null) {
-            outState.putParcelable(LayoutManagerStateKey, mStepsLayoutManager.onSaveInstanceState());
+            outState.putParcelable(LayoutManagerStateKey, mRvRecipes.getLayoutManager().onSaveInstanceState());
+            mRvRecipes.getLayoutManager().onRestoreInstanceState(mLayoutState);
         }
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         if (mRecipes == null) loadRecipes();
     }

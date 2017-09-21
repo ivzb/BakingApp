@@ -54,21 +54,9 @@ public class IngredientsFragment extends Fragment {
         mIngredientsLayoutManager = new LinearLayoutManager(getContext());
         mStepsLayoutManager = new LinearLayoutManager(getContext());
 
-        if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(RecipeKey)) {
-                Parcelable parcelable = savedInstanceState.getParcelable(RecipeKey);
-                mRecipe = Parcels.unwrap(parcelable);
-            }
-
-            if (savedInstanceState.containsKey(IngredientsLayoutManagerStateKey)) {
-                Parcelable state = savedInstanceState.getParcelable(IngredientsLayoutManagerStateKey);
-                mIngredientsLayoutManager.onRestoreInstanceState(state);
-            }
-
-            if (savedInstanceState.containsKey(StepsLayoutManagerStateKey)) {
-                Parcelable state = savedInstanceState.getParcelable(StepsLayoutManagerStateKey);
-                mStepsLayoutManager.onRestoreInstanceState(state);
-            }
+        if (savedInstanceState != null && savedInstanceState.containsKey(RecipeKey)) {
+            Parcelable parcelable = savedInstanceState.getParcelable(RecipeKey);
+            mRecipe = Parcels.unwrap(parcelable);
         }
 
         final View rootView = inflater.inflate(R.layout.fragment_ingredients, container, false);
@@ -81,6 +69,18 @@ public class IngredientsFragment extends Fragment {
             initSteps();
         }
 
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(IngredientsLayoutManagerStateKey)) {
+                Parcelable state = savedInstanceState.getParcelable(IngredientsLayoutManagerStateKey);
+                mRvIngredients.getLayoutManager().onRestoreInstanceState(state);
+            }
+
+            if (savedInstanceState.containsKey(StepsLayoutManagerStateKey)) {
+                Parcelable state = savedInstanceState.getParcelable(StepsLayoutManagerStateKey);
+                mRvSteps.getLayoutManager().onRestoreInstanceState(state);
+            }
+        }
+
         return rootView;
     }
 
@@ -91,11 +91,11 @@ public class IngredientsFragment extends Fragment {
         }
 
         if (mIngredientsLayoutManager != null) {
-            currentState.putParcelable(IngredientsLayoutManagerStateKey, mIngredientsLayoutManager.onSaveInstanceState());
+            currentState.putParcelable(IngredientsLayoutManagerStateKey, mRvIngredients.getLayoutManager().onSaveInstanceState());
         }
 
         if (mStepsLayoutManager != null) {
-            currentState.putParcelable(StepsLayoutManagerStateKey, mStepsLayoutManager.onSaveInstanceState());
+            currentState.putParcelable(StepsLayoutManagerStateKey, mRvSteps.getLayoutManager().onSaveInstanceState());
         }
     }
 

@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 
 import com.udacity.baking.R;
 import com.udacity.baking.data.entities.Ingredient;
@@ -24,17 +26,22 @@ public class RecipesActivity extends IdlingActivity implements RecipesFragment.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
 
-        boolean isTablet = findViewById(R.id.tablet_mode) != null;
+        if (savedInstanceState == null) {
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
+            boolean isTablet = findViewById(R.id.tablet_mode) != null;
 
-        RecipesFragment recipesFragment = new RecipesFragment();
-        recipesFragment.setTablet(isTablet);
-        recipesFragment.setIdlingResource(getIdlingResource());
+            FragmentManager fragmentManager = getSupportFragmentManager();
 
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragment_recipes, recipesFragment)
-                .commit();
+            RecipesFragment recipesFragment = new RecipesFragment();
+            recipesFragment.setTablet(isTablet);
+            recipesFragment.setIdlingResource(getIdlingResource());
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_recipes, recipesFragment)
+                    .commit();
+        }
     }
 
     @Override

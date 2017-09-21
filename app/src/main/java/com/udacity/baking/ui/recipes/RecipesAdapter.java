@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.udacity.baking.R;
 import com.udacity.baking.data.entities.Recipe;
 
@@ -39,6 +40,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         Recipe recipe = mRecipes.get(position);
 
         viewHolder.tvRecipe.setText(recipe.getName());
+
+        if (!recipe.getImage().equals("")) {
+            viewHolder.image.setImageURI(recipe.getImage());
+        }
     }
 
     @Override
@@ -49,11 +54,13 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        SimpleDraweeView image;
         TextView tvRecipe;
 
         ViewHolder(View itemView) {
             super(itemView);
 
+            image = (SimpleDraweeView) itemView.findViewById(R.id.imageView);
             tvRecipe = (TextView) itemView.findViewById(R.id.tvRecipe);
 
             itemView.setOnClickListener(this);
