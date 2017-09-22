@@ -93,6 +93,7 @@ public class RecipesFragment extends Fragment implements Callback<List<Recipe>>,
 
             if (savedInstanceState.containsKey(LayoutManagerStateKey)) {
                 mLayoutState = savedInstanceState.getParcelable(LayoutManagerStateKey);
+                mRvRecipes.getLayoutManager().onRestoreInstanceState(mLayoutState);
             }
         }
 
@@ -108,9 +109,8 @@ public class RecipesFragment extends Fragment implements Callback<List<Recipe>>,
             outState.putParcelableArray(RecipesKey, recipes);
         }
 
-        if (mStepsLayoutManager != null) {
+        if (mRvRecipes != null && mRvRecipes.getLayoutManager() != null) {
             outState.putParcelable(LayoutManagerStateKey, mRvRecipes.getLayoutManager().onSaveInstanceState());
-            mRvRecipes.getLayoutManager().onRestoreInstanceState(mLayoutState);
         }
     }
 

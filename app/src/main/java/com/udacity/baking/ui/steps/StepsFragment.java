@@ -82,6 +82,20 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
         mPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.playerView);
         mImageView = (SimpleDraweeView) rootView.findViewById(R.id.imageView);
 
+        return rootView;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        releasePlayer();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         if (mStep != null) {
             mTvDescription.setText(mStep.getDescription());
 
@@ -93,8 +107,6 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
                 showImage(mStep.getThumbnailURL());
             }
         }
-
-        return rootView;
     }
 
     @Override
@@ -103,12 +115,7 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
             currentState.putParcelable(StepKey, Parcels.wrap(mStep));
         }
 
-        if (mExoPlayer != null) {
-            long position = mExoPlayer.getCurrentPosition();
-            currentState.putLong(PositionKey, position);
-        }
-
-        releasePlayer();
+        currentState.putLong(PositionKey, mPosition);
     }
 
     public void setStep(Step step) {
@@ -184,6 +191,8 @@ public class StepsFragment extends Fragment implements ExoPlayer.EventListener {
 
     private void releasePlayer() {
         if (mExoPlayer != null) {
+            mPosition = mExoPlayer.getCurrentPosition();
+
             mExoPlayer.stop();
             mExoPlayer.release();
             mExoPlayer = null;
